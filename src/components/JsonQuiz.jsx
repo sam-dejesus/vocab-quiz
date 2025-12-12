@@ -1,9 +1,7 @@
-import wordBank from "../Wordbank";
 import { useState } from "react";
 
-export default function Quiz() {
-  const data = { wordBank }; // wrap in object like component expects
-
+export default function JsonQuiz({ data }) {
+  // data should be a JSON object with a wordBank array
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
@@ -33,16 +31,15 @@ export default function Quiz() {
     return (
       <div className="flex flex-col items-center p-6 gap-4">
         <h1 className="text-2xl font-bold">Quiz Complete!</h1>
-        <p className="text-lg">
-          Score: {score} / {questions.length}
-        </p>
+        <p className="text-lg">Score: {score} / {questions.length}</p>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col items-center p-6 gap-6 w-full max-w-lg mx-auto">
-      <h2 className="text-xl font-semibold">{q.title}</h2>
+      <h2 className="text-xl font-semibold">{q.word}</h2>
+      <p className="text-gray-600">{q.definition}</p>
 
       <div className="grid grid-cols-1 gap-4 w-full">
         {q.choices.map((choice, i) => (
